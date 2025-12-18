@@ -40,16 +40,19 @@ export default function ChatUI({ character, onBack }: ChatUIProps) {
   const handleSend = async () => {
     if (!inputText.trim()) return;
 
+    // 入力値を保存してから入力欄をクリア
+    const messageText = inputText.trim();
+    setInputText("");
+
     const userMsg: Message = {
       id: Date.now().toString(),
-      text: inputText,
+      text: messageText,
       sender: 'user',
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       isRead: true,
     };
 
     setMessages(prev => [...prev, userMsg]);
-    setInputText("");
     setIsTyping(true);
 
     try {
@@ -60,7 +63,7 @@ export default function ChatUI({ character, onBack }: ChatUIProps) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          message: inputText,
+          message: messageText,
           history: messages.slice(-10),
           charSetting: {
             name: character.name,
