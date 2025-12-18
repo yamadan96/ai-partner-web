@@ -18,6 +18,7 @@ type Character = {
   icon_url: string;
   personality: string;
   relationship: string;
+  user_name: string;
 };
 
 interface ChatUIProps {
@@ -65,6 +66,7 @@ export default function ChatUI({ character, onBack }: ChatUIProps) {
             name: character.name,
             personality: character.personality,
             relationship: character.relationship,
+            user_name: character.user_name,
           },
           characterId: character.id,
         }),

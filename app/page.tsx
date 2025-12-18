@@ -10,6 +10,7 @@ type Character = {
   icon_url: string;
   personality: string;
   relationship: string;
+  user_name: string;
 };
 
 export default function Home() {

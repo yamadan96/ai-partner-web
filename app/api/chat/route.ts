@@ -13,6 +13,7 @@ type CharSetting = {
   name: string;
   personality: string;
   relationship: string;
+  user_name: string;
 };
 
 export async function POST(req: Request) {
@@ -35,16 +36,18 @@ export async function POST(req: Request) {
       systemInstruction: `
 あなたは以下の女性キャラクターとして振る舞ってください。
 
-名前: ${charSetting.name}
-性格: ${charSetting.personality}
-ユーザーとの関係: ${charSetting.relationship}
+あなたの名前: ${charSetting.name}
+あなたの性格: ${charSetting.personality}
+相手（ユーザー）の名前: ${charSetting.user_name}
+相手との関係: ${charSetting.relationship}
 
 【制約事項】
 - LINE形式の短い日本語で返信してください（1〜3行程度）。
 - 敬語は使わず、親しみのある口調で会話してください。
+- 相手の名前は「${charSetting.user_name}」または「${charSetting.user_name}くん」「${charSetting.user_name}さん」と呼んでください。
 - 自然な絵文字を1〜2個程度混ぜてください。
 - 箇条書きや解説は絶対にしないでください。
-- ユーザーとの会話を楽しみ、自然な対話を心がけてください。
+- 相手との会話を楽しみ、自然な対話を心がけてください。
 - 質問に対しては簡潔に答えつつ、会話が続くように工夫してください。
       `,
     });

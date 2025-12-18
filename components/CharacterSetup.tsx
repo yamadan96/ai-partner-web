@@ -43,6 +43,7 @@ interface CharacterSetupProps {
     personality: string;
     relationship: string;
     icon_url: string;
+    user_name: string;
   }) => void;
 }
 
@@ -50,6 +51,7 @@ export default function CharacterSetup({ onComplete }: CharacterSetupProps) {
   const [selectedAvatar, setSelectedAvatar] = useState<typeof AI_AVATARS[0] | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [name, setName] = useState('');
+  const [userName, setUserName] = useState('');
   const [relationship, setRelationship] = useState('彼女');
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,7 +65,11 @@ export default function CharacterSetup({ onComplete }: CharacterSetupProps) {
 
   const handleSubmit = () => {
     if (!name.trim()) {
-      alert('名前を入力してください');
+      alert('彼女の名前を入力してください');
+      return;
+    }
+    if (!userName.trim()) {
+      alert('あなたの名前を入力してください');
       return;
     }
     if (!selectedAvatar && !preview) {
@@ -76,6 +82,7 @@ export default function CharacterSetup({ onComplete }: CharacterSetupProps) {
       personality: selectedAvatar?.personality || 'あなたの彼女として、優しく会話します。',
       relationship,
       icon_url: preview || selectedAvatar?.url || '',
+      user_name: userName.trim(),
     });
   };
 
@@ -100,16 +107,30 @@ export default function CharacterSetup({ onComplete }: CharacterSetupProps) {
         </div>
       </div>
 
-      {/* 名前入力 */}
+      {/* 彼女の名前入力 */}
       <div className="mb-6">
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          名前
+          彼女の名前
         </label>
         <input
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="例: さくら"
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-line-green"
+        />
+      </div>
+
+      {/* あなたの名前入力 */}
+      <div className="mb-6">
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          あなたの名前
+        </label>
+        <input
+          type="text"
+          value={userName}
+          onChange={(e) => setUserName(e.target.value)}
+          placeholder="例: たかし"
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-line-green"
         />
       </div>
