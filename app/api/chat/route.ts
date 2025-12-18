@@ -24,6 +24,11 @@ export async function POST(req: Request) {
       characterId: string;
     };
 
+    console.log('=== Chat API Request ===');
+    console.log('Message:', message);
+    console.log('Character:', charSetting.name);
+    console.log('API Key exists:', !!process.env.GOOGLE_GENERATIVE_AI_API_KEY);
+
     // Gemini 1.5 Flashモデルの初期化
     const model = genAI.getGenerativeModel({
       model: "gemini-1.5-flash",
@@ -56,12 +61,27 @@ export async function POST(req: Request) {
     const result = await chat.sendMessage(message);
     const responseText = result.response.text();
 
+    console.log('Response text:', responseText);
+    console.log('Response length:', responseText.length);
+
+    if (!responseText || responseText.trim().length === 0) {
+      console.error('Empty response from Gemini API');
+      return NextResponse.json({ text: "ごめんね、ちょっと考え中...もう一度話しかけてくれる？" });
+    }
+
     return NextResponse.json({ text: responseText });
 
   } catch (error) {
-    console.error('Chat API error:', error);
+    console.error('=== Chat API Error ===');
+    console.error('Error type:', error instanceof Error ? error.constructor.name : typeof error);
+    console.error('Error message:', error instanceof Error ? error.message : String(error));
+    console.error('Full error:', error);
+
     return NextResponse.json(
-      { error: "通信エラーが発生しました" },
+      {
+        text: "ごめん、うまく返信できなかった💦 もう一度試してみて！",
+        error: error instanceof Error ? error.message : "Unknown error"
+      },
       { status: 500 }
     );
   }
