@@ -169,7 +169,12 @@ export default function ChatUI({ character, onBack }: ChatUIProps) {
               type="text"
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleSend()}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  handleSend();
+                }
+              }}
               placeholder="メッセージを入力"
               className="w-full bg-gray-100 rounded-full px-4 py-2 text-sm focus:outline-none"
             />
