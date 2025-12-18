@@ -1,6 +1,7 @@
 # AI Partner Web - LINE風AI彼女チャットアプリ
 
 LINE風のUIでAI彼女と会話できるWebアプリケーションです。
+<img width="441" height="614" alt="image" src="https://github.com/user-attachments/assets/8a5663da-4ed5-421a-85d9-1f4b4b9698fe" />
 
 ## 機能
 
