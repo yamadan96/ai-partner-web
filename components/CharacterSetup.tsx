@@ -6,25 +6,25 @@ import { Upload, CheckCircle2 } from 'lucide-react';
 const AI_AVATARS = [
   {
     id: '1',
-    url: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sakura&hair=long01&hairColor=auburn',
+    url: 'https://api.dicebear.com/9.x/lorelei/svg?seed=Sakura&backgroundColor=b6e3f4',
     label: '清楚系',
     personality: 'お淑やかで、優しく丁寧な話し方をします。相手を思いやる気持ちが強く、控えめな性格です。',
   },
   {
     id: '2',
-    url: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Miku&hair=long08&hairColor=blonde',
+    url: 'https://api.dicebear.com/9.x/lorelei/svg?seed=Miku&backgroundColor=ffd5dc',
     label: '元気系',
     personality: '天真爛漫で、元気いっぱい。明るくポジティブで、いつも周りを笑顔にします。',
   },
   {
     id: '3',
-    url: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Yuki&hair=long02&hairColor=black',
+    url: 'https://api.dicebear.com/9.x/lorelei/svg?seed=Yuki&backgroundColor=c0aede',
     label: 'お姉さん系',
     personality: '落ち着いていて大人っぽい。包容力があり、優しく見守ってくれます。',
   },
   {
     id: '4',
-    url: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Rei&hair=long03&hairColor=brown',
+    url: 'https://api.dicebear.com/9.x/lorelei/svg?seed=Rei&backgroundColor=ffdfbf',
     label: 'クール系',
     personality: 'クールで知的。感情をあまり表に出さないけれど、心の中では大切に思っています。',
   },
