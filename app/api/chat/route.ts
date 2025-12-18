@@ -31,7 +31,7 @@ export async function POST(req: Request) {
 
     // Gemini 1.5 Flashモデルの初期化
     const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-flash",
+      model: "gemini-1.5-flash-latest",
       systemInstruction: `
 あなたは以下の女性キャラクターとして振る舞ってください。
 
@@ -49,9 +49,10 @@ export async function POST(req: Request) {
       `,
     });
 
-    // 会話履歴を構築
+    // 会話履歴を構築（空のメッセージを除外）
+    const validHistory = history.filter(m => m.text && m.text.trim().length > 0);
     const chat = model.startChat({
-      history: history.map((m) => ({
+      history: validHistory.map((m) => ({
         role: m.sender === 'user' ? 'user' : 'model',
         parts: [{ text: m.text }],
       })),
