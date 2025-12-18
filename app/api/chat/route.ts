@@ -29,9 +29,17 @@ export async function POST(req: Request) {
     console.log('Character:', charSetting.name);
     console.log('API Key exists:', !!process.env.GOOGLE_GENERATIVE_AI_API_KEY);
 
-    // Gemini 1.5 Flashモデルの初期化
+    // 利用可能なモデルをリストアップ（デバッグ用）
+    try {
+      const models = await genAI.listModels();
+      console.log('Available models:', models.map(m => m.name).join(', '));
+    } catch (e) {
+      console.log('Could not list models:', e);
+    }
+
+    // Geminiモデルの初期化（gemini-proを使用）
     const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-flash-latest",
+      model: "gemini-pro",
       systemInstruction: `
 あなたは以下の女性キャラクターとして振る舞ってください。
 
